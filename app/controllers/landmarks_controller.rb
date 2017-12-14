@@ -1,7 +1,9 @@
 class LandmarksController < ApplicationController
 
   #INDEX
-  get '/landmarks/' do
+  get '/landmarks' do
+    @landmarks = Landmark.all
+
     erb :'/landmarks/index'
   end
 
@@ -11,11 +13,15 @@ class LandmarksController < ApplicationController
   end
 
   post '/landmarks' do
-    erb :'/landmarks'
+    # binding.pry
+    @landmark = Landmark.create(params[:landmark])
+    redirect to '/landmarks'
   end
 
   #SHOW
   get '/landmarks/:id' do
+    @landmark = Landmark.find(params[:id])
+
     erb :'/landmarks/show'
   end
 
@@ -27,7 +33,7 @@ class LandmarksController < ApplicationController
 
   patch '/landmarks/:id' do
 
-    erb :'/landmarks/show'
+    # redirect '/landmarks/:id'
   end
 
   #DELETE
